@@ -3,7 +3,8 @@
   Save as dev_quick_access/static/description/index.html.
   Keep all seven referenced PNG files in static/description/img/.
   This is an HTML fragment: no document wrapper, scripts or external stylesheets.
-  Screenshots are stacked so every image remains accessible without a carousel.
+  Screenshots use the host page's Bootstrap 5 carousel with manual slide controls.
+  Standalone previews must load Bootstrap 5 CSS and JavaScript separately.
 -->
 <div style="width:100%; max-width:1000px; margin:0 auto; background-color:#fdfdfc; color:#1b1a18; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.55; text-align:left;">
 
@@ -13,7 +14,7 @@
             <span style="display:inline-block; width:34px; height:34px; line-height:34px; text-align:center; vertical-align:middle; border-radius:9px; background-color:#1b1a18; font-size:0;">
                 <img src="img/fa_bolt.png" width="19" height="19" alt="" style="display:inline-block; width:19px; height:19px; vertical-align:middle; border:0;" />
             </span>
-            <span style="display:inline-block; margin-left:10px; vertical-align:middle; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:#8a877f; font-family:monospace;">Odoo 19 &middot; Technical X</span>
+            <span style="display:inline-block; margin-left:10px; vertical-align:middle; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:#8a877f; font-family:monospace;">Odoo 19 &middot; Technical</span>
         </div>
 
         <h1 style="margin:0 0 16px; font-family:Arial, Helvetica, sans-serif; font-size:clamp(32px, 5vw, 52px); line-height:1.05; letter-spacing:-1px; font-weight:700; color:#1b1a18;">Developer Quick Access</h1>
@@ -30,47 +31,68 @@
         </div>
     </div>
 
-    <!-- SCREENSHOTS: fluid images with ordinary anchor links -->
+    <!-- SCREENSHOTS: Bootstrap 5 carousel, using the Apps Store's own CSS/JS -->
     <div style="padding:56px 6.4%; border-bottom:1px solid #e6e4de;">
         <h2 style="margin:0 0 8px; font-family:monospace; font-size:15px; line-height:1.4; letter-spacing:1.5px; text-transform:uppercase; color:#8a877f; font-weight:400;">Screenshots</h2>
-        <p style="margin:0 0 20px; font-size:14px; color:#8a877f;">From installation to opening your first result in a new tab.</p>
+        <p style="margin:0 0 20px; font-size:14px; color:#8a877f;">Use Previous / Next or choose a screenshot below.</p>
 
-        <div style="margin:0 0 24px;">
-            <a href="#shot-1" style="display:inline-block; margin:0 6px 8px 0; padding:10px 12px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">01 &middot; Install</a>
-            <a href="#shot-2" style="display:inline-block; margin:0 6px 8px 0; padding:10px 12px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">02 &middot; Systray bolt</a>
-            <a href="#shot-3" style="display:inline-block; margin:0 6px 8px 0; padding:10px 12px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">03 &middot; Apps &amp; models</a>
-            <a href="#shot-4" style="display:inline-block; margin:0 6px 8px 0; padding:10px 12px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">04 &middot; Menus &amp; actions</a>
-            <a href="#shot-5" style="display:inline-block; margin:0 6px 8px 0; padding:10px 12px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">05 &middot; New tab</a>
-        </div>
+        <!-- Bootstrap's data API handles the links. No custom script is required here. -->
+        <div id="devQuickAccessScreenshotCarousel" class="carousel slide" data-bs-wrap="true" data-bs-keyboard="true" data-bs-touch="true" role="region" aria-roledescription="carousel" aria-label="Developer Quick Access screenshots">
+            <div style="margin:0 0 18px; text-align:right;">
+                <a href="#devQuickAccessScreenshotCarousel" data-bs-target="#devQuickAccessScreenshotCarousel" data-bs-slide="prev" role="button" aria-controls="devQuickAccessScreenshotCarousel" aria-label="Previous screenshot" style="display:inline-block; margin:0 6px 8px 0; padding:10px 16px; border:1px solid #1b1a18; border-radius:9px; font-size:14px; font-weight:700; color:#fdfdfc; background-color:#1b1a18; text-align:center; text-decoration:none;"><span aria-hidden="true">&larr;</span> Previous</a>
+                <a href="#devQuickAccessScreenshotCarousel" data-bs-target="#devQuickAccessScreenshotCarousel" data-bs-slide="next" role="button" aria-controls="devQuickAccessScreenshotCarousel" aria-label="Next screenshot" style="display:inline-block; margin:0 0 8px; padding:10px 16px; border:1px solid #1b1a18; border-radius:9px; font-size:14px; font-weight:700; color:#fdfdfc; background-color:#1b1a18; text-align:center; text-decoration:none;">Next <span aria-hidden="true">&rarr;</span></a>
+            </div>
 
-        <div id="shot-1" style="margin:0 0 32px;">
-            <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">01 &middot; Install</h3>
-            <div style="padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
-                <img src="img/1_install_app.png" alt="Installing Developer Quick Access from the Apps list" style="display:block; width:100%; max-width:100%; height:auto; margin:0; border:0; border-radius:8px;" />
+            <div class="carousel-inner" aria-live="polite">
+                <div id="shot-1" class="carousel-item active" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                    <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">01 · Install</h3>
+                    <div style="margin:0; padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
+                        <div class="ratio ratio-16x9" style="background-color:#ffffff; border-radius:8px;">
+                            <img src="img/1_install_app.png" alt="Installing Developer Quick Access from the Apps list" style="display:block; width:100%; max-width:100%; height:100%; object-fit:contain; margin:0; border:0; border-radius:8px;" />
+                        </div>
+                    </div>
+                </div>
+                <div id="shot-2" class="carousel-item" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                    <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">02 · Systray bolt</h3>
+                    <div style="margin:0; padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
+                        <div class="ratio ratio-16x9" style="background-color:#ffffff; border-radius:8px;">
+                            <img src="img/2_bolt_view.png" alt="The yellow bolt icon in the systray top bar" style="display:block; width:100%; max-width:100%; height:100%; object-fit:contain; margin:0; border:0; border-radius:8px;" />
+                        </div>
+                    </div>
+                </div>
+                <div id="shot-3" class="carousel-item" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                    <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">03 · Apps &amp; models</h3>
+                    <div style="margin:0; padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
+                        <div class="ratio ratio-16x9" style="background-color:#ffffff; border-radius:8px;">
+                            <img src="img/3_search.png" alt="Searching CRM: the CRM app shown with its icon plus matching models" style="display:block; width:100%; max-width:100%; height:100%; object-fit:contain; margin:0; border:0; border-radius:8px;" />
+                        </div>
+                    </div>
+                </div>
+                <div id="shot-4" class="carousel-item" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                    <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">04 · Menus &amp; actions</h3>
+                    <div style="margin:0; padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
+                        <div class="ratio ratio-16x9" style="background-color:#ffffff; border-radius:8px;">
+                            <img src="img/4_email_temp_search.png" alt="Searching email: technical menus and window actions in one list" style="display:block; width:100%; max-width:100%; height:100%; object-fit:contain; margin:0; border:0; border-radius:8px;" />
+                        </div>
+                    </div>
+                </div>
+                <div id="shot-5" class="carousel-item" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                    <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">05 · New tab</h3>
+                    <div style="margin:0; padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
+                        <div class="ratio ratio-16x9" style="background-color:#ffffff; border-radius:8px;">
+                            <img src="img/5_new_tab_open.png" alt="Email Templates opened in a new browser tab, still in developer mode" style="display:block; width:100%; max-width:100%; height:100%; object-fit:contain; margin:0; border:0; border-radius:8px;" />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="shot-2" style="margin:0 0 32px;">
-            <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">02 &middot; Systray bolt</h3>
-            <div style="padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
-                <img src="img/2_bolt_view.png" alt="The yellow bolt icon in the systray top bar" style="display:block; width:100%; max-width:100%; height:auto; margin:0; border:0; border-radius:8px;" />
-            </div>
-        </div>
-        <div id="shot-3" style="margin:0 0 32px;">
-            <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">03 &middot; Apps &amp; models</h3>
-            <div style="padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
-                <img src="img/3_search.png" alt="Searching CRM: the CRM app shown with its icon plus matching models" style="display:block; width:100%; max-width:100%; height:auto; margin:0; border:0; border-radius:8px;" />
-            </div>
-        </div>
-        <div id="shot-4" style="margin:0 0 32px;">
-            <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">04 &middot; Menus &amp; actions</h3>
-            <div style="padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
-                <img src="img/4_email_temp_search.png" alt="Searching email: technical menus and window actions in one list" style="display:block; width:100%; max-width:100%; height:auto; margin:0; border:0; border-radius:8px;" />
-            </div>
-        </div>
-        <div id="shot-5" style="margin:0;">
-            <h3 style="margin:0 0 12px; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.4; font-weight:700; color:#4a4842;">05 &middot; New tab</h3>
-            <div style="padding:4px; border:1px solid #e6e4de; border-radius:12px; background-color:#ffffff;">
-                <img src="img/5_new_tab_open.png" alt="Email Templates opened in a new browser tab, still in developer mode" style="display:block; width:100%; max-width:100%; height:auto; margin:0; border:0; border-radius:8px;" />
+
+            <!-- Text navigation is outside carousel-indicators to avoid Bootstrap's hidden-text indicator styling. -->
+            <div style="margin:18px 0 0;">
+                <a href="#devQuickAccessScreenshotCarousel" data-bs-target="#devQuickAccessScreenshotCarousel" data-bs-slide-to="0" role="button" aria-controls="devQuickAccessScreenshotCarousel" aria-label="Show screenshot 1: 01 · Install" style="display:inline-block; margin:0 6px 8px 0; padding:12px 14px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">01 · Install</a>
+                <a href="#devQuickAccessScreenshotCarousel" data-bs-target="#devQuickAccessScreenshotCarousel" data-bs-slide-to="1" role="button" aria-controls="devQuickAccessScreenshotCarousel" aria-label="Show screenshot 2: 02 · Systray bolt" style="display:inline-block; margin:0 6px 8px 0; padding:12px 14px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">02 · Systray bolt</a>
+                <a href="#devQuickAccessScreenshotCarousel" data-bs-target="#devQuickAccessScreenshotCarousel" data-bs-slide-to="2" role="button" aria-controls="devQuickAccessScreenshotCarousel" aria-label="Show screenshot 3: 03 · Apps &amp; models" style="display:inline-block; margin:0 6px 8px 0; padding:12px 14px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">03 · Apps &amp; models</a>
+                <a href="#devQuickAccessScreenshotCarousel" data-bs-target="#devQuickAccessScreenshotCarousel" data-bs-slide-to="3" role="button" aria-controls="devQuickAccessScreenshotCarousel" aria-label="Show screenshot 4: 04 · Menus &amp; actions" style="display:inline-block; margin:0 6px 8px 0; padding:12px 14px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">04 · Menus &amp; actions</a>
+                <a href="#devQuickAccessScreenshotCarousel" data-bs-target="#devQuickAccessScreenshotCarousel" data-bs-slide-to="4" role="button" aria-controls="devQuickAccessScreenshotCarousel" aria-label="Show screenshot 5: 05 · New tab" style="display:inline-block; margin:0 6px 8px 0; padding:12px 14px; border:1px solid #e6e4de; border-radius:9px; font-size:13px; color:#4a4842; background-color:#fdfdfc; text-align:center; text-decoration:none;">05 · New tab</a>
             </div>
         </div>
     </div>
