@@ -1,0 +1,44 @@
+.o_dev_quick_access {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+
+    .fa {
+        font-size: 18px;
+        color: #ffc107;
+    }
+}
+
+.o_dev_qa_input {
+    font-size: 1.1rem;
+}
+
+.o_dev_qa_results {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.o_dev_qa_result {
+    cursor: pointer;
+    border-radius: 4px;
+
+    &.o_dev_qa_active,
+    &:hover {
+        background-color: var(--o-gray-200, #e9ecef);
+    }
+}
+
+.o_dev_qa_icon {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    color: var(--o-gray-600, #6c757d);
+
+    .o_dev_qa_app_icon {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        border-radius: 4px;
+    }
+}

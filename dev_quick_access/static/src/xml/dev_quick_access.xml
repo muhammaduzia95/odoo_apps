@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="dev_quick_access.Systray">
+        <div class="o_dev_quick_access" role="button"
+             t-on-click="onClick" title="Developer Quick Access (Alt+Shift+D)">
+            <i class="fa fa-bolt"/>
+        </div>
+    </t>
+
+    <t t-name="dev_quick_access.Dialog">
+        <Dialog title="'Developer Quick Access'" size="'lg'">
+            <div class="o_dev_qa_body" t-on-keydown="onKeydown">
+                <input type="text" t-ref="searchInput"
+                       class="form-control o_dev_qa_input"
+                       placeholder="Search app, menus, actions, models…"
+                       t-on-input="onInput"/>
+
+                <div class="o_dev_qa_results mt-2">
+                    <t t-if="state.loading">
+                        <div class="text-muted p-2">Searching…</div>
+                    </t>
+                    <t t-elif="!state.results.length and state.query">
+                        <div class="text-muted p-2">
+                            Not found — nothing matches "<t t-esc="state.query"/>"
+                        </div>
+                    </t>
+                    <t t-foreach="state.results" t-as="res" t-key="res.key">
+                        <div class="o_dev_qa_result d-flex justify-content-between align-items-center p-2"
+                             t-att-class="{ 'o_dev_qa_active': res_index === state.activeIndex }"
+                             t-on-click="() => this.openResult(res)"
+                             t-on-mouseenter="() => this.setActive(res_index)">
+                            <div class="d-flex align-items-center text-truncate">
+                                <span class="o_dev_qa_icon d-flex align-items-center justify-content-center me-2">
+                                    <img t-if="res.icon"
+                                         class="o_dev_qa_app_icon"
+                                         t-att-src="'data:image/png;base64,' + res.icon"
+                                         alt=""/>
+                                    <i t-else="" class="fa" t-att-class="faIcon(res)"/>
+                                </span>
+                                <span class="text-truncate" t-esc="res.label"/>
+                            </div>
+                            <small class="text-muted ms-3 flex-shrink-0" t-esc="res.sub"/>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </Dialog>
+    </t>
+
+</templates>
